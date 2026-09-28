@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# venv / uv
+.venv/
+# uv.lock 은 배포 재현성을 위해 커밋에 포함한다(무시하지 않음)
+
+# env / secrets
+# ⚠️ 키 미발급 상태 → .env 를 추적하지 않는다.
+#    (배포 시 프라이빗 레포 베이킹 여부는 키 발급 후 결정)
+.env
+.env.local
+
+# 개인화 메모리 런타임 SQLite (커밋 금지 — 사용자 데이터)
+*.db
+policy_memory.db
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
