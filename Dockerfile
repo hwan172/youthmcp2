@@ -25,11 +25,8 @@ USER appuser
 # 원격(Streamable HTTP) 모드로 기동 → http://<host>:8000/mcp/
 ENV MCP_TRANSPORT=http \
     MCP_HOST=0.0.0.0 \
-    MCP_PORT=8000
-EXPOSE 8000
-
-# 포트 오픈 여부로 간단 헬스체크
+    PORT=8080
+EXPOSE 8080
 HEALTHCHECK --interval=30s --timeout=3s --retries=3 \
-  CMD python -c "import socket; socket.create_connection(('127.0.0.1',8000),2)" || exit 1
-
-CMD ["uv", "run", "policy-mcp"]
+  CMD python -c "import os,socket; socket.create_connection(('127.0.0.1',int(os.environ.get('PORT',8080))),2)" || exit 1
+CMD ["uv", "run", "--no-sync", "policy-mcp"]
